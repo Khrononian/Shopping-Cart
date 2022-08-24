@@ -1,6 +1,5 @@
 import React, { useState} from 'react'
 import Products from './Products'
-import Nav from '../Nav'
 
 const ProductData = () => {
     const [laptops, setLaptops] = useState([
@@ -70,7 +69,6 @@ const ProductData = () => {
 
     return (
         <div>
-            <Nav />
             <Products laptops={laptops} mouse={mouse} />
         </div>
     )

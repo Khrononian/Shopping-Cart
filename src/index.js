@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import Products from './Components/Products';
+import Cart from './Components/Cart';
 import ProductData from './Components/ProductData';
 import Laptops from './Components/Laptops';
-import Desktops from './Components/Desktops';
+import Mouse from './Components/Mouse';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +15,8 @@ root.render(
       <Route path='/' element={<App />} />
       <Route path='/products' element={<ProductData />} />
       <Route path='/products/laptops' element={<Laptops />} />
-      <Route path='/products/desktops' element={<Desktops />} />
+      <Route path='/products/mouse' element={<Mouse />} />
+      <Route path='/cart' element={<Cart />} />
     </Routes>
   </BrowserRouter>
 );
