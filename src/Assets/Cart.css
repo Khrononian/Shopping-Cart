@@ -1,0 +1,37 @@
+.product {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cards {
+    width: 250px;
+    text-align: center;
+}
+
+.cards h2 {
+    font-size: 1rem;
+}
+
+.cards img {
+    width: 100%;
+}
+
+.cards p {
+    margin-bottom: .7rem;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns button {
+    padding: .3em 1em;
+    cursor: pointer;
+}
+
+.btns p {
+    align-items: center;
+    margin: 0 .5rem;
+}
