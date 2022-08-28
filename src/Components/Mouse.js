@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Nav from '../Nav'
 
 const Mouse = () => {
-  const [mouse, setMouse] = useState([
+  const mouse = [
     {
         title: "Logitech Mouse (M185) - Blue",
         price: "$16.99",
@@ -33,7 +33,7 @@ const Mouse = () => {
         price: "$29.99",
         image: "https://target.scene7.com/is/image/Target/GUEST_c03715da-bb93-4306-8ae4-19947b2ffeae"
     }
-  ])
+  ]
 
   return (
     <div>

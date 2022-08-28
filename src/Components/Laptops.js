@@ -5,7 +5,7 @@ import Products from './Products'
 import '../Assets/Products.css'
 
 const Laptops = (props) => {
-  const [laptops, setLaptops] = useState([
+  const laptops = [
     {
         title: "Acer 15.6 Touchscreen Chromebook with Chrome OS - Intel Processor - 4GB RAM - 64GB Flash Storage",
         price: "$169.99",
@@ -36,14 +36,11 @@ const Laptops = (props) => {
         price: "$269.99",
         image: "https://target.scene7.com/is/image/Target/GUEST_3bb8b683-f0a7-4b7e-8207-ea716a72f41d"
     }
-  ])
-  const location = useLocation()
+  ]
 
   return (
     <div>
-      {/* {console.log(location, props)} */}
-      {console.log(window.localStorage)}
-      <Nav storedData={window.localStorage}/>
+      <Nav />
       <header>
         <h1>Laptops</h1>
       </header>

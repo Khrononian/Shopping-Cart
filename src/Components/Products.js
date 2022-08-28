@@ -8,11 +8,16 @@ import '../Assets/Products.css'
 
 const Products = (props) => {
   const [cartNum, setCartNum] = useState(window.localStorage.getItem('cartNum'))
-  const location = useLocation()
+  const [cartData, setCartData] = useState([])
   const products = [];
 
+  // USE CART DATA TO POST THE PRODUCTS IN CART INTO THE CART PAGE FOR DISPLAY. 
+  // USE SET TO ADD NEW ONES, MAP THE ARRAY OF OBJECTS TO POST THE DATA (CODE GOES IN CART.JS)
+  // SAVE THE DATA
+
   useEffect(() => {
-    const savedProducts = products.push(JSON.parse(window.localStorage.getItem('products')))
+    const savedProducts = JSON.parse(window.localStorage.getItem('products'))
+    
     
     if (products[0] === null) products.splice(0, 1)
     // JSON.parse(window.localStorage.getItem('products')).filter(product => product === null)
@@ -20,36 +25,37 @@ const Products = (props) => {
     for (let product in savedProducts) {
       products.push(savedProducts[product])
     }
-    console.log('PROD', products)
-  }, [])
+    // products.concat(savedProducts)
+    
+  }, [products])
   
   // window.localStorage.clear()
-  
   
   console.log('Prop', cartNum)
   const addToCart = event => {
     console.log(window.localStorage)
     const findLaptop = props.laptops.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
     const findMouse = props.mouse.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
-    console.log('Find', findLaptop)
-    // console.log('Check', props.laptops.findIndex(item => item.title === event.nativeEvent.path[2].innerText), event.nativeEvent.path[2].firstChild.innerText)
     
     if (findLaptop) {
+      
       JSON.parse(window.localStorage.getItem('products'))
       products.push(findLaptop.title)
-      // window.localStorage.setItem('cartNum', cartNum)
-      
-      
-      console.log('Count', JSON.parse(window.localStorage.getItem('products')))
+      // console.log('Product', findLaptop)
+      setCartData(cartData.concat(findLaptop))
+      console.log('CC', cartData)
+      // console.log('Count', JSON.parse(window.localStorage.getItem('products')))
     }
 
     if (findMouse) {
-      // setCartNum(prevNum => prevNum.concat(findMouse))
-      products.concat(findMouse.title)
-
+      JSON.parse(window.localStorage.getItem('products'))
+      products.push(findMouse.title)
     }
+
+    setCartNum(Number(cartNum) + 1)
     window.localStorage.setItem('products', JSON.stringify(products))
     window.localStorage.setItem('cartNum', JSON.parse(window.localStorage.getItem('products')).length)
+    window.localStorage.setItem('cartData', JSON.stringify(cartData))
     // setCartNum(JSON.parse(window.localStorage.getItem('products')).length)
     console.log('Product Num - SETS STATE BEFORE', cartNum, products, window.localStorage)
     // console.log('Text', findLaptop)

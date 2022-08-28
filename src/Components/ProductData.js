@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import Products from './Products'
 
 const ProductData = () => {
-    const [laptops, setLaptops] = useState([
+    const laptops = [
         {
             title: "Acer 15.6 Touchscreen Chromebook with Chrome OS - Intel Processor - 4GB RAM - 64GB Flash Storage",
             price: "$169.99",
@@ -33,8 +33,9 @@ const ProductData = () => {
             price: "$269.99",
             image: "https://target.scene7.com/is/image/Target/GUEST_3bb8b683-f0a7-4b7e-8207-ea716a72f41d"
         }
-    ])
-    const [mouse, setMouse] = useState([
+    ]
+    
+    const mouse = [
         {
             title: "Logitech Mouse (M185) - Blue",
             price: "$16.99",
@@ -65,7 +66,7 @@ const ProductData = () => {
             price: "$29.99",
             image: "https://target.scene7.com/is/image/Target/GUEST_c03715da-bb93-4306-8ae4-19947b2ffeae"
         }
-    ])
+    ]
 
     return (
         <div>
