@@ -6,12 +6,13 @@ const Nav = (props) => {
     const navigate = useNavigate()
     const nav = useNavigate()
 
-    // const [cartNum, setCartNum] = useState(0);
+    useEffect(() => {
+        if (window.localStorage.getItem('cartNum') !== null) window.localStorage.getItem('cartNum')
+    }, [])
 
     // useEffect(() => {
-        
-    //     window.localStorage.setItem('cartNum', cartNum)
-    // }, [cartNum])
+    //     setCart(Number(window.localStorage.cartNum) + 1)
+    // }, [cart])
     
     // window.localStorage.clear()
     console.log(props)
@@ -40,7 +41,11 @@ const Nav = (props) => {
                     : `Cart (${props.cartNum.length})`
                     } */}
                     
-                    Cart ({window.localStorage.getItem('cartNum') === null ? 0 : window.localStorage.getItem('cartNum')})
+                    {/* Cart ({window.localStorage.getItem('cartNum') === null ? 0 : window.localStorage.getItem('cartNum')}) */}
+                    {/* Cart ({props.cartNum === undefined ? 0 : props.cartNum}) */}
+                    {console.log('FUBD', props.cartNum, window.localStorage)}
+                    {/* Cart ({props.cartNum === null || props.cartNum === undefined ? 0 : window.localStorage.cartNum}) */}
+                    Cart ({window.localStorage.cartNum === null || window.localStorage.cartNum === undefined ? 0 : window.localStorage.cartNum})
                 </Link>
                 
                 {console.log('Save v2', window.localStorage)}
