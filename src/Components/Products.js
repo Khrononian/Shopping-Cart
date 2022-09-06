@@ -2,13 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import ProductData from './ProductData'
 import Nav from '../Nav'
 import '../Assets/Products.css'
 
 const Products = (props) => {
   const [cartNum, setCartNum] = useState(window.localStorage.getItem('cartNum'))
-  const [cartData, setCartData] = useState([])
+  const [cartInfo, setCartInfo] = useState([])
+  const cartData = []
   const products = [];
 
   // USE CART DATA TO POST THE PRODUCTS IN CART INTO THE CART PAGE FOR DISPLAY. 
@@ -17,7 +17,7 @@ const Products = (props) => {
 
   useEffect(() => {
     const savedProducts = JSON.parse(window.localStorage.getItem('products'))
-    
+    const savedCart = JSON.parse(window.localStorage.getItem('cartData'))
     
     if (products[0] === null) products.splice(0, 1)
     // JSON.parse(window.localStorage.getItem('products')).filter(product => product === null)
@@ -25,9 +25,17 @@ const Products = (props) => {
     for (let product in savedProducts) {
       products.push(savedProducts[product])
     }
+    for (let data in savedCart) {
+      // JSON.parse(window.localStorage.getItem('cartData')).concat(savedCart[data])
+      cartData.push(savedCart[data])
+      // setCartInfo(cartInfo.concat(savedCart[data]))
+      // setCartInfo(prevCart => prevCart.concat(savedCart[data]))
+      // window.localStorage.setItem('cartInfo', JSON.stringify(cartInfo))
+    }
+    
     // products.concat(savedProducts)
     
-  }, [products])
+  }, [products, cartData])
   
   // window.localStorage.clear()
   
@@ -38,18 +46,29 @@ const Products = (props) => {
     const findMouse = props.mouse.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
     
     if (findLaptop) {
-      
       JSON.parse(window.localStorage.getItem('products'))
+      JSON.parse(window.localStorage.getItem('cartData'))
       products.push(findLaptop.title)
       // console.log('Product', findLaptop)
-      setCartData(cartData.concat(findLaptop))
-      console.log('CC', cartData)
-      // console.log('Count', JSON.parse(window.localStorage.getItem('products')))
+      findLaptop.quantity = 1
+      cartData.push(findLaptop)
+      // setCartInfo(JSON.parse(window.localStorage.getItem('cartData')))
+      setCartInfo(prevCart => prevCart.concat(findLaptop))
+      console.log('CC', cartData, cartInfo)
+      
+      if (!window.localStorage.total) window.localStorage.setItem('total', Number(findLaptop.price))
     }
 
     if (findMouse) {
       JSON.parse(window.localStorage.getItem('products'))
+      JSON.parse(window.localStorage.getItem('cartData'))
       products.push(findMouse.title)
+
+      findMouse.quantity = 1
+      cartData.push(findMouse)
+      setCartInfo(prevCart => prevCart.concat(findMouse))
+
+      console.log('Mouse', cartInfo)
     }
 
     setCartNum(Number(cartNum) + 1)

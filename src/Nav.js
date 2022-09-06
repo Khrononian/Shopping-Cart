@@ -15,7 +15,7 @@ const Nav = (props) => {
     // }, [cart])
     
     // window.localStorage.clear()
-    console.log(props)
+    // console.log(props)
     return (
         <nav>
             <div className='heading'>
@@ -43,7 +43,6 @@ const Nav = (props) => {
                     
                     {/* Cart ({window.localStorage.getItem('cartNum') === null ? 0 : window.localStorage.getItem('cartNum')}) */}
                     {/* Cart ({props.cartNum === undefined ? 0 : props.cartNum}) */}
-                    {console.log('FUBD', props.cartNum, window.localStorage)}
                     {/* Cart ({props.cartNum === null || props.cartNum === undefined ? 0 : window.localStorage.cartNum}) */}
                     Cart ({window.localStorage.cartNum === null || window.localStorage.cartNum === undefined ? 0 : window.localStorage.cartNum})
                 </Link>
