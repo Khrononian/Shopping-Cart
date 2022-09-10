@@ -56,7 +56,11 @@ const Products = (props) => {
       setCartInfo(prevCart => prevCart.concat(findLaptop))
       console.log('CC', cartData, cartInfo)
       
-      if (!window.localStorage.total) window.localStorage.setItem('total', Number(findLaptop.price))
+      if (!window.localStorage.total) {
+        window.localStorage.setItem('total', Number(findLaptop.price))
+        window.localStorage.setItem('Total', Number(findLaptop.price) + Number(window.localStorage.total))
+      }
+      else window.localStorage.setItem('total', Number(findLaptop.price) + Number(window.localStorage.total))
     }
 
     if (findMouse) {
