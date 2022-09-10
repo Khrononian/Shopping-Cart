@@ -46,4 +46,20 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    padding: .75em;
+    color: white;
+}
+
+.footer-btn {
+    margin-left: 3.5rem;
+    font-size: 1.2rem;
+    background: black;
+    border: 2px solid white;
+    color: white;
+    padding: .3em;
+    cursor: pointer;
 }
