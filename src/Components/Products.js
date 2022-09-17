@@ -38,10 +38,8 @@ const Products = (props) => {
   }, [products, cartData])
   
   // window.localStorage.clear()
-  
-  console.log('Prop', cartNum)
+
   const addToCart = event => {
-    console.log(window.localStorage)
     const findLaptop = props.laptops.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
     const findMouse = props.mouse.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
     
@@ -49,12 +47,10 @@ const Products = (props) => {
       JSON.parse(window.localStorage.getItem('products'))
       JSON.parse(window.localStorage.getItem('cartData'))
       products.push(findLaptop.title)
-      // console.log('Product', findLaptop)
       findLaptop.quantity = 1
       cartData.push(findLaptop)
-      // setCartInfo(JSON.parse(window.localStorage.getItem('cartData')))
+      
       setCartInfo(prevCart => prevCart.concat(findLaptop))
-      console.log('CC', cartData, cartInfo)
       
       if (!window.localStorage.total) {
         window.localStorage.setItem('total', Number(findLaptop.price))
@@ -72,16 +68,17 @@ const Products = (props) => {
       cartData.push(findMouse)
       setCartInfo(prevCart => prevCart.concat(findMouse))
 
-      console.log('Mouse', cartInfo)
+      if (!window.localStorage.total) {
+        window.localStorage.setItem('total', Number(findMouse.price))
+        window.localStorage.setItem('Total', Number(findMouse.price) + Number(window.localStorage.total))
+      }
+      else window.localStorage.setItem('total', Number(findMouse.price) + Number(window.localStorage.total))
     }
 
     setCartNum(Number(cartNum) + 1)
     window.localStorage.setItem('products', JSON.stringify(products))
     window.localStorage.setItem('cartNum', JSON.parse(window.localStorage.getItem('products')).length)
     window.localStorage.setItem('cartData', JSON.stringify(cartData))
-    // setCartNum(JSON.parse(window.localStorage.getItem('products')).length)
-    console.log('Product Num - SETS STATE BEFORE', cartNum, products, window.localStorage)
-    // console.log('Text', findLaptop)
   }
 
   return (

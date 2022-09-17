@@ -4,29 +4,15 @@ import '../Assets/Cart.css'
 
 const Cart = () => {
     const [number, setNumber] = useState([]);
-    const [price, setPrice] = useState(0)
-    let value = null
-    // const prices = JSON.parse(window.localStorage.getItem('cartData')) === null ? null  
-    // : JSON.parse(window.localStorage.getItem('cartData'))
-    // .map(current => current.price * current.quantity)
-    // .reduce((previousValue, currentValue) => Math.round(Number(previousValue) * 100 + Number(currentValue) * 100) / 100)
     const savedProducts = [];
     
-
     useEffect(() => {
-
-        
         if (window.localStorage.getItem('cartData') === null) return 
         else {
             JSON.parse(window.localStorage.getItem('cartData')).map(current => (savedProducts.push(current)))
-            // window.localStorage.setItem('total', Number(window.localStorage.getItem('total')))
-
-            // setPrice(window.localStorage.getItem('total'))
         } 
         console.log('FRI', savedProducts, window.localStorage, typeof window.localStorage.total)
     }, [savedProducts])
-    // USE SAVED PRODUCTS TO CHANGE THE QUANTITY AND THEN POST IT TO THE SAVED DATA
-    // OR LOOK INTO ANOTHER IDEA IF POSSIBLE
 
     const incrementProduct = event => {
         const productName = savedProducts.find(product => product.title === event.nativeEvent.path[2].firstChild.innerText)
@@ -42,23 +28,8 @@ const Cart = () => {
                     .map(current => current.price * (current.quantity))
                     .reduce((previousValue, currentValue) => Math.round(Number(previousValue) * 100 + Number(currentValue) * 100) / 100, Number(currentProduct.price))
                     
-                    console.log('NOW')
                     window.localStorage.setItem('total', prices)
                 }
-                
-                // const prices = JSON.parse(window.localStorage.getItem('cartData'))
-                // .map(current => current.price * (current.quantity))
-                // .reduce((previousValue, currentValue) => Math.round(Number(previousValue) * 100 + Number(currentValue) * 100) / 100, Number(currentProduct.price))
-                
-                console.log('Name', currentProduct, productName)
-                // if (productName.quantity === 1 &&  productName) {
-                //     console.log('First Add')
-                //     window.localStorage.setItem('total', window.localStorage.getItem('Total'))
-                // }
-                // else {
-                //     console.log('ADDED')
-                //     window.localStorage.setItem('total', prices)
-                // }
             })
             
             setNumber(copiedArray);
@@ -78,11 +49,20 @@ const Cart = () => {
         const copiedArray = number.concat(savedProducts)
 
         if (productName) {
-            if (productName.quantity !== 1) productName.quantity--
-            else return
+            if (productName.quantity > 1) productName.quantity--
+            else if (JSON.parse(window.localStorage.getItem('cartData')).find(current => current.title === productName.title)) {
+                const index = JSON.parse(window.localStorage.getItem('cartData')).findIndex(current => current.title === productName.title)
+                const array = JSON.parse(window.localStorage.getItem('cartData')).splice(index, 1)
+                const newArray = JSON.parse(window.localStorage.getItem('products')).splice(index, 1)
 
+                savedProducts.splice(index, 1)
+                window.localStorage.setItem('cartData', JSON.stringify(array))
+                window.localStorage.setItem('cartNum', newArray.length)
+                console.log('Index', index, savedProducts, array, newArray, window.localStorage)
+            } 
+            console.log('CHECK', productName)
             
-            const prices = Number(window.localStorage.getItem('total')) - productName.price
+            const prices = Math.round(Number(window.localStorage.getItem('total')) * 100 - productName.price * 100)  / 100
             
             // .reduce((previousValue, currentValue) => Math.round(Number(previousValue) * 100 - Number(productName.price) * 100) / 100)
             
@@ -125,7 +105,6 @@ const Cart = () => {
                                 </div>
                                 
                             </div>
-                            
                         )
                     })
                 }
