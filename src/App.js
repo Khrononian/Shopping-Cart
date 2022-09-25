@@ -18,9 +18,9 @@ const App = () => {
       {/* <Nav cartNum={cartNum} getData={getData}/> */}
       <Nav products={JSON.parse(window.localStorage.getItem('products'))}/>
       <header>
-        <h1>Novus Computers</h1>
+        <h1>Game Anywhere,<br/>All Day</h1>
       </header>
-      <Link to='/products' >Shop</Link>
+      <Link to='/products' className='link-tag'>Shop Now</Link>
     </div>
   )
 }
