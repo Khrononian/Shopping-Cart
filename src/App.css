@@ -9,6 +9,14 @@ header {
   margin-top: 2rem;
 }
 
-button a {
+.link-tag {
   text-decoration: none;
+  font-size: 1.4rem;
+  color: black;
+  padding: 1em;
+}
+
+.link-tag:hover {
+  background: black;
+  color: white;
 }

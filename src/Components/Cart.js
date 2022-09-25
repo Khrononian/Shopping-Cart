@@ -43,7 +43,7 @@ const Cart = () => {
         
         console.log('After', savedProducts, window.localStorage, number)
     }
-    // window.localStorage.clear()
+    window.localStorage.clear()
     const decrementProduct = event => {
         const productName = savedProducts.find(product => product.title === event.nativeEvent.path[2].firstChild.innerText)
         const copiedArray = number.concat(savedProducts)
@@ -53,27 +53,24 @@ const Cart = () => {
             else if (JSON.parse(window.localStorage.getItem('cartData')).find(current => current.title === productName.title)) {
                 const index = JSON.parse(window.localStorage.getItem('cartData')).findIndex(current => current.title === productName.title)
                 const array = JSON.parse(window.localStorage.getItem('cartData')).splice(index, 1)
-                const newArray = JSON.parse(window.localStorage.getItem('products')).splice(index, 1)
+                const productIndex = JSON.parse(window.localStorage.getItem('products')).indexOf(productName.title)
+                const products = JSON.parse(window.localStorage.getItem('products'))
 
                 savedProducts.splice(index, 1)
+                products.splice(productIndex, 1)
+                
                 window.localStorage.setItem('cartData', JSON.stringify(array))
-                window.localStorage.setItem('cartNum', newArray.length)
-                console.log('Index', index, savedProducts, array, newArray, window.localStorage)
+                window.localStorage.setItem('products', JSON.stringify(products))
+                window.localStorage.setItem('cartNum', products.length)
+                console.log('Index', index, savedProducts, window.localStorage)
+                console.log('Index 2', array, products)
             } 
             console.log('CHECK', productName)
             
             const prices = Math.round(Number(window.localStorage.getItem('total')) * 100 - productName.price * 100)  / 100
-            
-            // .reduce((previousValue, currentValue) => Math.round(Number(previousValue) * 100 - Number(productName.price) * 100) / 100)
-            
-            // if (current.quantity === 1 && !productName) window.localStorage.setItem('total', window.localStorage.getItem('Total'))
-            // else window.localStorage.setItem('total', prices)
 
             console.log('Price', prices, productName.price)
             window.localStorage.setItem('total', prices)
-            
-
-            
             setNumber(copiedArray)
             console.log('PRO', productName, savedProducts)
 

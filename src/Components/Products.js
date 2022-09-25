@@ -15,6 +15,10 @@ const Products = (props) => {
   // USE SET TO ADD NEW ONES, MAP THE ARRAY OF OBJECTS TO POST THE DATA (CODE GOES IN CART.JS)
   // SAVE THE DATA
 
+  // ARRAY DOESNT SAVE THE OTHER PRODUCT FOR SOME REASON
+  useEffect(() => {
+
+  }, [])
   useEffect(() => {
     const savedProducts = JSON.parse(window.localStorage.getItem('products'))
     const savedCart = JSON.parse(window.localStorage.getItem('cartData'))
@@ -32,7 +36,7 @@ const Products = (props) => {
       // setCartInfo(prevCart => prevCart.concat(savedCart[data]))
       // window.localStorage.setItem('cartInfo', JSON.stringify(cartInfo))
     }
-    
+    console.log('Intro', products, window.localStorage)
     // products.concat(savedProducts)
     
   }, [products, cartData])
@@ -44,41 +48,55 @@ const Products = (props) => {
     const findMouse = props.mouse.find(item => item.title === event.nativeEvent.path[2].firstChild.innerText)
     
     if (findLaptop) {
-      JSON.parse(window.localStorage.getItem('products'))
-      JSON.parse(window.localStorage.getItem('cartData'))
-      products.push(findLaptop.title)
-      findLaptop.quantity = 1
-      cartData.push(findLaptop)
-      
       setCartInfo(prevCart => prevCart.concat(findLaptop))
       
-      if (!window.localStorage.total) {
-        window.localStorage.setItem('total', Number(findLaptop.price))
-        window.localStorage.setItem('Total', Number(findLaptop.price) + Number(window.localStorage.total))
-      }
-      else window.localStorage.setItem('total', Number(findLaptop.price) + Number(window.localStorage.total))
+      getItemType(findLaptop)
     }
 
     if (findMouse) {
-      JSON.parse(window.localStorage.getItem('products'))
-      JSON.parse(window.localStorage.getItem('cartData'))
-      products.push(findMouse.title)
-
-      findMouse.quantity = 1
-      cartData.push(findMouse)
       setCartInfo(prevCart => prevCart.concat(findMouse))
 
-      if (!window.localStorage.total) {
-        window.localStorage.setItem('total', Number(findMouse.price))
-        window.localStorage.setItem('Total', Number(findMouse.price) + Number(window.localStorage.total))
-      }
-      else window.localStorage.setItem('total', Number(findMouse.price) + Number(window.localStorage.total))
+      getItemType(findMouse)
     }
 
     setCartNum(Number(cartNum) + 1)
     window.localStorage.setItem('products', JSON.stringify(products))
-    window.localStorage.setItem('cartNum', JSON.parse(window.localStorage.getItem('products')).length)
     window.localStorage.setItem('cartData', JSON.stringify(cartData))
+    console.log('PRO RO', products)
+  }
+
+  const getItemType = (type) => {
+    JSON.parse(window.localStorage.getItem('products'))
+    JSON.parse(window.localStorage.getItem('cartData'))
+
+    if (!window.localStorage.total) {
+      window.localStorage.setItem('total', Number(type.price))
+      window.localStorage.setItem('Total', Number(type.price) + Number(window.localStorage.total))
+      window.localStorage.setItem('cartNum', Number(cartNum) + 1)
+      setCartNum(Number(cartNum) + 1)
+
+      products.push(type.title)
+      cartData.push(type)
+    } else if (cartData.find(current => current.title === type.title) ) {
+      const index = cartData.findIndex(current => current.title === type.title)
+      
+      cartData[index].quantity++
+      setCartNum(Number(cartNum) + 1)
+
+      console.log('QU', type, cartData, window.localStorage)
+      window.localStorage.setItem('total', Number(type.price) + Number(window.localStorage.total))
+      window.localStorage.setItem('cartData', JSON.stringify(cartData))
+      window.localStorage.setItem('cartNum', Number(cartNum) + 1)
+  
+      return
+    } else {
+      window.localStorage.setItem('total', Number(type.price) + Number(window.localStorage.total))
+      window.localStorage.setItem('cartNum', Number(cartNum) + 1)
+      products.push(type.title)
+      cartData.push(type)
+      console.log('ME ME', window.localStorage)
+      setCartNum(Number(cartNum) + 1)
+    }
   }
 
   return (
