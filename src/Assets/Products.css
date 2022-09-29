@@ -11,6 +11,7 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
+    margin-top: 1rem;
 }
 
 .card {
@@ -56,7 +57,3 @@ header {
 .btn {
     width: 100%;
 }
-
-/* .btn button {
-    margin-top: 2.5rem;
-} */
