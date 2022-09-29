@@ -43,7 +43,7 @@ const Cart = () => {
         
         console.log('After', savedProducts, window.localStorage, number)
     }
-    window.localStorage.clear()
+    // window.localStorage.clear()
     const decrementProduct = event => {
         const productName = savedProducts.find(product => product.title === event.nativeEvent.path[2].firstChild.innerText)
         const copiedArray = number.concat(savedProducts)
