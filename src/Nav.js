@@ -17,22 +17,13 @@ const Nav = (props) => {
     // window.localStorage.clear()
     // console.log(props)
     return (
-        <nav>
+        <nav id='nav'>
             <div className='heading'>
                 <p>Novus Computers</p>
             </div>
             <div className='links'>
                 <Link to='/' state={{info: props.cart}}>Home</Link>
                 <Link to='/products' state={{info: props.cart}}>Products</Link>
-                {/* <button onClick={sendToProduct}>
-                    Products
-                </button> */}
-                <Link to='/products/laptops' state={{info: props.cartNum}}>Laptops</Link>
-                {/* <button onClick={sendInfo}>
-                    Laptops
-                </button> */}
-                <Link to='/products/mouse'>Mouse</Link>
-            
                 <Link to='/cart'
                     state={{
                         info: props.cartNum
