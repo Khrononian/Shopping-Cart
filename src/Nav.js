@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Assets/Nav.css'
 
 const Nav = (props) => {
-    const navigate = useNavigate()
-    const nav = useNavigate()
-
     useEffect(() => {
         if (window.localStorage.getItem('cartNum') !== null) window.localStorage.getItem('cartNum')
     }, [])
 
-    // useEffect(() => {
-    //     setCart(Number(window.localStorage.cartNum) + 1)
-    // }, [cart])
-    
-    // window.localStorage.clear()
-    // console.log(props)
     return (
         <nav id='nav'>
             <div className='heading'>
@@ -28,17 +19,9 @@ const Nav = (props) => {
                     state={{
                         info: props.cartNum
                     }}>
-                    {/* {props.location ? `Cart (${props.location.length})`
-                    : `Cart (${props.cartNum.length})`
-                    } */}
                     
-                    {/* Cart ({window.localStorage.getItem('cartNum') === null ? 0 : window.localStorage.getItem('cartNum')}) */}
-                    {/* Cart ({props.cartNum === undefined ? 0 : props.cartNum}) */}
-                    {/* Cart ({props.cartNum === null || props.cartNum === undefined ? 0 : window.localStorage.cartNum}) */}
                     Cart ({window.localStorage.cartNum === null || window.localStorage.cartNum === undefined ? 0 : window.localStorage.cartNum})
                 </Link>
-                
-                {console.log('Save v2', window.localStorage)}
             </div>
         </nav>
     )

@@ -12,6 +12,7 @@
 .cards {
     width: 250px;
     text-align: center;
+    margin-bottom: 5rem;
 }
 
 .cards h2 {

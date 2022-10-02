@@ -1,6 +1,5 @@
 * {
     text-align: center;
-    /* background: rgb(240, 240, 240); */
 }
 
 header {
@@ -46,7 +45,6 @@ header {
 }
 
 .images {
-    /* width: 250px; */
     width: 100%;
     object-fit: contain;
     border-bottom: 1px solid black;

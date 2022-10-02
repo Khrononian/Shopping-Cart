@@ -11,7 +11,6 @@ const Cart = () => {
         else {
             JSON.parse(window.localStorage.getItem('cartData')).map(current => (savedProducts.push(current)))
         } 
-        console.log('FRI', savedProducts, window.localStorage, typeof window.localStorage.total)
     }, [savedProducts])
 
     const incrementProduct = event => {
@@ -31,17 +30,9 @@ const Cart = () => {
                     window.localStorage.setItem('total', prices)
                 }
             })
-            
             setNumber(copiedArray);
-            // setPrice(prices)
-            // Number(window.localStorage.getItem('total')) * 2
-            console.log('Hi', savedProducts, productName, number)
         }
-        
         window.localStorage.setItem('cartData', JSON.stringify(savedProducts))
-        // window.localStorage.setItem('total', prices)
-        
-        console.log('After', savedProducts, window.localStorage, number)
     }
     // window.localStorage.clear()
     const decrementProduct = event => {
@@ -62,18 +53,11 @@ const Cart = () => {
                 window.localStorage.setItem('cartData', JSON.stringify(array))
                 window.localStorage.setItem('products', JSON.stringify(products))
                 window.localStorage.setItem('cartNum', products.length)
-                console.log('Index', index, savedProducts, window.localStorage)
-                console.log('Index 2', array, products)
             } 
-            console.log('CHECK', productName)
-            
             const prices = Math.round(Number(window.localStorage.getItem('total')) * 100 - productName.price * 100)  / 100
 
-            console.log('Price', prices, productName.price)
             window.localStorage.setItem('total', prices)
             setNumber(copiedArray)
-            console.log('PRO', productName, savedProducts)
-
             window.localStorage.setItem('cartData', JSON.stringify(savedProducts))
         }
     }
@@ -81,7 +65,6 @@ const Cart = () => {
     return (
         <div className='content'>
             <Nav storedData={window.localStorage}/>
-            {console.log('Save', number, window.localStorage)}
             <header>
                 <h1>Shopping Cart</h1>
             </header>
@@ -91,7 +74,6 @@ const Cart = () => {
                     window.localStorage.length === 0 ? null : JSON.parse(window.localStorage.getItem('cartData')).map((product, index) => {
                         return (
                             <div className='cards' key={index}>
-                                {console.log('num', number)}
                                 <h2>{product.title}</h2>
                                 <img src={product.image} alt='Laptop' />
                                 <p>${product.price}</p>
@@ -100,7 +82,6 @@ const Cart = () => {
                                     <p>{product.quantity}</p>
                                     <button onClick={incrementProduct}>+</button>
                                 </div>
-                                
                             </div>
                         )
                     })
